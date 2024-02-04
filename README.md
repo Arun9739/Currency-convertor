@@ -1,4 +1,4 @@
-# Currency Converrtor React App
+# Currency Convertor App
 
 This is a React application that fetches and displays Forex rates from the [Forex Rate API](https://forexrateapi.com/forex).
 
