@@ -28,7 +28,8 @@ const ForexRates = () => {
 
   const convertCurrency = (amount, currency) => {
     const rate = rates[currency];
-    setConvertedAmount(amount * rate);
+    const converted = amount * parseFloat(rate);
+  setConvertedAmount(isNaN(converted) ? 0 : converted);
   };
 
   const handleAmountChange = (e) => {
@@ -37,23 +38,37 @@ const ForexRates = () => {
   };
 
   const handleCurrencyChange = (e) => {
-    setSelectedCurrency(e.target.value);
+    const selectedValue = e.target.value;
+    setSelectedCurrency(selectedValue);
+
+    if (selectedValue === '') {
+      setConvertedAmount(0);
+    }
   };
 
   return (
-    <div>
-      <h2>Forex Rates ({baseCurrency})</h2>
-      <p>Last Updated: {new Date(timestamp * 1000).toLocaleString()}</p>
+    <div className="container">
+      <h2 className="text-3xl font-bold mb-4">Forex Rates ({baseCurrency})</h2>
+      <p className="text-gray-600">Last Updated: {new Date(timestamp * 1000).toLocaleString()}</p>
 
-      {/* Currency Converter */}
-      <div>
-        <label>
+      <div className="currency-section">
+        <label className="mr-4">
           Amount:
-          <input type="number" value={amount} onChange={handleAmountChange} />
+          <input
+            type="number"
+            value={amount}
+            onChange={handleAmountChange}
+            className="currency-input ml-2"
+          />
         </label>
         <label>
           Currency:
-          <select value={selectedCurrency} onChange={handleCurrencyChange}>
+          <select
+            value={selectedCurrency}
+            onChange={handleCurrencyChange}
+            className="currency-select mr-2 ml-2"
+          >
+            <option value="">Select a currency</option>
             {Object.keys(rates).map((currency) => (
               <option key={currency} value={currency}>
                 {currency}
@@ -61,11 +76,11 @@ const ForexRates = () => {
             ))}
           </select>
         </label>
-        <p>Converted Amount: {convertedAmount.toFixed(2)}</p>
+        <p className="mt-2 font-bold">Converted Amount: {convertedAmount.toFixed(2)}</p>
       </div>
 
       {/* Forex Rates Table */}
-      <table>
+      <table className="forex-table">
         <thead>
           <tr>
             <th>Currency</th>

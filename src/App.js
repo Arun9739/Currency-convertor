@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+import styles from './App.css';
 import ForexRates from './Components/ForexRates/ForexRates';
 
 function App() {
