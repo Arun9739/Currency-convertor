@@ -13,7 +13,7 @@ const ForexRates = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://api.forexrateapi.com/v1/latest?api_key=1681b36dabd5442115c84db5592a0dec');
+        const response = await axios.get(process.env.REACT_APP_FOREX_API_URL);
         setRates(response.data.rates);
         setBaseCurrency(response.data.base);
         setTimestamp(response.data.timestamp);
